@@ -1,0 +1,39 @@
+---
+import { Icon } from 'astro-icon/components';
+
+
+interface Props {
+    IconName: String;
+    IconSize?: number;
+    Text: String;
+}
+
+
+const { IconName, IconSize = 24 ,Text = "TEST" } = Astro.props;
+---
+
+<div class="smallServiceCard">
+    <Icon name = {IconName} size={IconSize}/>
+    <b>{Text}</b>
+    
+</div>
+
+<style>
+.smallServiceCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.5em;
+    align-items: center;
+    width: 6em;
+    height: 7em;
+    border-radius: 1em;
+    border: 0.1em solid blue;
+}
+b{
+    font-size: 70%;
+}
+</style>
+
+<script>
+</script>

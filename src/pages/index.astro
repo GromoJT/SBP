@@ -1,0 +1,99 @@
+---
+import { Image } from "astro:assets"
+import MainLayout from "../layouts/mainLayout.astro"
+import heroElementImg from "../assets/hero_element_1.png"
+import ServiceCardHero from "../components/ServiceCardHero.astro"
+import photo_1 from "../assets/photo-1.png";
+---
+<MainLayout>
+	
+	<div class="hero-section">
+
+		<div class="hero-container">
+
+			<h1>
+				SERWIS BEZPIECZEŃSTWA PRACY
+			</h1>
+			<h4>
+				Od przeszło 10 lat wspieramy naszych klientów na poszczególnych</br> etapach produkcji,  budowy  i modernizacji.<br>
+			</h4>
+			<section class="ServiceRow">
+				<ServiceCardHero IconName={"iconCertificat"} IconSize={65} Text={"Szkolimy"}/>
+				<ServiceCardHero IconName={"iconEye"} IconSize={65} Text={"Nadzorujemy"}/>
+				<ServiceCardHero IconName={"iconBubble"} IconSize={65} Text={"Doradzamy"}/>
+				<ServiceCardHero IconName={"iconHandshake"} IconSize={65} Text={"Współpracujemy"}/>
+			</section>
+			<p>
+				Współtworzymy szeroko rozumianą <code>Kulturę Bezpieczeństwa</code>
+			</p>
+			<!-- <a href="/" class="hero-btn">
+				Join now!
+			</a> -->
+		</div>
+		<div>
+			<Image src={heroElementImg} alt="hero element" class="hero-img"/> 
+		</div>
+	</div>
+	<main>
+		<section class="motto">
+			<h2>Nie ma uniwersalnych rozwiazań, są za to ludzie i środowisko pracy w którym się znajdują</h2>
+			<span class="ServiceRow">
+				<Image src={photo_1} alt="my" width={400} />
+				<p>
+					Wychodzimy z założenia, że dobre przygotwanie poprzedzone rzetelną analizą ryzyka jest kluczowym elementem bezpieczeństwa w pracy. Pozanjać dane środowisko pracy, możemy wypracować rozwiazania, które pozwolą minimalizować zwiazane z nimi zagrożęnia oraz ich wpływ na pracujacego człowieka. 
+				</p>
+			</span>
+		</section>
+	</main>
+</MainLayout>
+
+<style>
+	.hero-section{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		padding-top: 4em;
+		padding-bottom: 1em;
+		background-color: rgba(220,220, 220,0.2);
+		min-height: 25em;
+		gap:3em;
+
+	}
+	.hero-container{
+		margin-let: 3em;
+		display: flex;
+		text-align: center;
+		flex-direction: column;
+		justify-content: center;
+	}
+	.hero-container h1{
+		margin:0;
+		padding: 0;
+	}
+	.hero-container h4{
+		margin:0;
+		padding: 0;
+	}
+	.hero-img{
+		width: 350px;
+	}
+	.ServiceRow{
+		padding-top: 1em;
+		justify-content: center;
+		display: flex;
+		direction: row;
+		gap: 1em;
+	}
+	.ServiceRow p {
+		font-size: 1.3rem;
+		text-align: justify;
+	}
+	.motto{
+		padding: 2em 1em 2em 1em;
+	}
+	h2{
+		margin:0;
+		padding: 0;
+		text-align: center;
+	}
+</style>

@@ -1,0 +1,146 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'input'>;
+
+const actualtheme = Astro.cookies.get("theme")?.value ?? "system";
+
+const {type, class: className, ...props } = Astro.props;
+---
+
+<div class="themeChangerWrapper">
+    <input 
+      type="checkbox" 
+      class="themeSwitcher" 
+      id="theme_toggle_input" 
+      name="themeSwitcher"/>
+    <label for="theme_toggle_input" class="label">
+      <Icon name="moonSolid" size={15}/>
+      <Icon name="sun" size={15}/>
+      <div class="ball"></div>
+    </label>
+</div>
+
+<!-- <label class="switch">
+    <input type="checkbox" id="theme_toggle_input" name="themeSwitcher" >
+    <span class="slider round"></span>
+    
+</label> -->
+
+
+<style>
+
+.label{
+  height:2em;
+  width: 3.6em;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 1em;
+  padding: 5px;
+  position: relative;
+}
+
+.themeSwitcher{
+  opacity: 0;
+  position: absolute;
+}
+
+.themeSwitcher:checked + .label .ball{
+  transform: translateX(1.6em);
+}
+
+.themeSwitcher:checked + .label{
+  background-color: #111;
+}
+.themeSwitcher:checked + .label>.ball{
+  background-color: purple;
+}
+
+.themeSwitcher:checked.label{
+  background-color: #111;
+}
+
+.ball{
+  width: 1.7em;
+  height: 1.7em;
+  background-color: #fff;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  border-radius: 50%;
+  transition: transform 0.1s linear;
+}
+
+
+//----
+
+
+</style>
+
+<script>
+
+    type Themes = "light"|"dark"|"system";
+    
+    const themeToggles = document.querySelectorAll('[name="themeSwitcher"]');
+    
+    function getCookie(cname: string): string | null {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+
+
+    if (getCookie("theme") == "dark") {
+      themeToggles.forEach((tt:HTMLInputElement)=>{tt.checked = true})
+    }
+    else if(getCookie("theme") == "" && window.matchMedia('(prefers-color-scheme: dark)')){
+      themeToggles.forEach((tt:HTMLInputElement)=>{tt.checked = true})
+    }
+    else{
+      themeToggles.forEach((tt:HTMLInputElement)=>{tt.checked = false})
+    }
+
+    function changeTheme(theme: Themes){
+		document.documentElement.setAttribute("data-theme",theme)
+	}
+
+    function saveTheme(theme:Themes){
+		const d = new Date();
+		d.setTime(d.getTime() + 7 * 86400000);
+		document.cookie = `theme=${theme};expires=${d.toUTCString()}`;
+	}
+
+    function handleThemeClick(e: Event){
+		const checked = ((e.target as HTMLInputElement).checked)
+		console.log(checked)
+    let theme
+    if(checked){
+        theme = "dark" as Themes;
+    }
+    else{
+        theme = "light" as Themes;
+    }
+    changeTheme(theme);
+		saveTheme(theme);
+
+	}
+
+    themeToggles.forEach(t => t.addEventListener("change",handleThemeClick))
+
+    // const toggle = document.querySelector(".theme_toggle")
+    // toggle?.addEventListener("click", () => {console.log("OK")})
+
+</script>

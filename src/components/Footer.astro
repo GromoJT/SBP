@@ -1,0 +1,162 @@
+---
+const today = new Date();
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+---
+
+<footer>
+	<div class="f-container">
+		<div class="contacts">
+			<section class="contact-info" >
+				<Icon name="iconPhone" size={24}/> 
+				<span id="phone_number-fixed">666 666 666</span>
+			</section>
+			<section class="contact-info" >
+				<Icon name="iconMail" size={24}/> 
+				<span id="email-fixed">testowy@gmail.com</span>
+			</section>	
+			<section class="contact-socials" >
+				<Icon name="IconLinkedin" size={80} />
+				<Icon name="iconfacebook" size={80} />
+			</section>	
+		</div>
+		<div class="contact-form">
+			<div class="left-column">
+				<p>Skontaktuj sie z nami już teraz!</p>
+			<button>Wyślij</button>
+			</div>
+			
+			<form>
+				<section>
+					<input type="text" id="fname" name="fname" placeholder="imię"/>
+					<input type="number" id="number" name="number" placeholder="tel"/>
+				</section>
+				<section>
+					<input type="email" id="email" name="email" placeholder="email"/>
+				</section>
+				<textarea id="tresc" name="tresc" placeholder="Lubię pplacki"/>
+			</form>
+		</div>
+	</div>
+	<span class="foot-of-the-foot"> Wszelkie prawa zastrzeżone</span>
+</footer>
+<style>
+
+	footer {
+		flex-shrink: 0;
+		width: 100%;
+		padding: 1em 0 0 0;
+		margin: 2em 0em 0em 0em;
+		background: linear-gradient(var(--gray-gradient)) no-repeat;
+		color: rgb(var(--gray));
+		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	.f-container{
+		width: 1000px;
+		max-width: calc(100% - 2em);
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		flex-grow: 1;
+		align-items: stretch;
+		padding-bottom: 1em;
+	}
+	.contacts{
+		display: flex;
+		flex-direction: column;
+		text-align: start;
+	}
+	.contact-socials{
+		text-align: center;
+		display: flex;
+		justify-content: center;
+	}
+	.contact-form{
+		flex-grow: 1;
+		display: flex;
+		flex-direction: row;
+		gap: 1em;
+		padding: 0 0em 0 2em;
+	}
+	.foot-of-the-foot{
+		flex-shrink: 1;
+		background-color: black;
+		width: 100%;
+	}
+
+	.contact-info{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		letter-spacing: 0.1em;
+		gap: 0.5em;
+		font-weight: 700;
+	}
+
+	.contact-info span{
+		cursor: pointer;
+	} 
+	.left-column{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+	.left-column p {
+		margin: 0;
+		padding: 0;
+	}
+
+	form{
+		display: flex;
+		flex-direction: column;
+		gap: 0.3em;
+	}
+
+	form section {
+		gap: 0.3em;
+		display: flex;
+		flex-direction: row;
+	}
+	form input{
+		flex-grow: 1;
+	}
+	textarea { resize: none; flex-grow: 1;}
+</style>
+
+<script>
+
+const phone = document.getElementById("phone_number-fixed") ;
+const email = document.getElementById("email-fixed") ;
+	if (phone != null){
+		phone.onclick = function() {
+		navigator.clipboard.writeText(phone.innerText)
+		showToast()
+		}
+	}
+
+	if (email != null){
+		email.onclick = function() {
+		navigator.clipboard.writeText(email.innerText)
+		showToast()
+		}
+	}
+
+
+	function showToast() {
+	// Get the snackbar DIV
+	var x = document.getElementById("snackbar");
+		if(x != null){
+			x.classList.add("show");
+			if(x != null){
+				// After 3 seconds, remove the show class from DIV
+				setTimeout(() => x?.classList.remove("show"), 3000);
+			}
+		}
+	}
+
+</script>
